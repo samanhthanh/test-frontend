@@ -17,7 +17,8 @@ const LoginForm = () => {
     setErrorMsg('');
     setSuccessMsg('');
     try {
-      const response = await axios.post('http://localhost:8080/api/auth/signin', {
+      // const response = await axios.post('http://localhost:8080/api/auth/signin', {
+      const response = await axios.post('https://springboot-app-afro.onrender.com/api/auth/signin', {
         username,
         password,
       });

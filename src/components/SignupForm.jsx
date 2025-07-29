@@ -25,7 +25,8 @@ const SignupForm = () => {
     setErrorMsg('');
     setSuccessMsg('');
     try {
-      const response = await axios.post('http://localhost:8080/api/auth/signup', formData);
+      // const response = await axios.post('http://localhost:8080/api/auth/signup', formData);
+      const response = await axios.post('https://springboot-app-afro.onrender.com/api/auth/signup', formData);
       console.log(response.data);
       setSuccessMsg('Đăng ký thành công! Hãy đăng nhập.');
       setFormData({ username: '', email: '', password: '' });
