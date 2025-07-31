@@ -1,31 +1,39 @@
-// src/components/LoginForm.jsx
 import React, { useState } from 'react';
 import {
   Box, Button, TextField, Typography, Container, Alert, Link
 } from '@mui/material';
-import { Link as RouterLink } from 'react-router-dom';
-import axios from 'axios';
+import { Link as RouterLink, useNavigate } from 'react-router-dom';
+import axios from '../../axiosConfig';
 
-const LoginForm = () => {
+const LoginForm = ({ onLogin }) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [errorMsg, setErrorMsg] = useState('');
   const [successMsg, setSuccessMsg] = useState('');
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setErrorMsg('');
     setSuccessMsg('');
     try {
-      // const response = await axios.post('http://localhost:8080/api/auth/signin', {
-      const response = await axios.post('https://springboot-app-afro.onrender.com/api/auth/signin', {
+      console.log('API URL login:', process.env.REACT_APP_API_URL);
+      const response = await axios.post('/api/auth/signin', {
         username,
         password,
       });
-      console.log(response.data);
-      setSuccessMsg('Đăng nhập thành công!');
-      // Lưu token nếu cần
+
+      const token = response.data.jwtToken;
+      if (token) {
+        localStorage.setItem('token', token);
+        setSuccessMsg('Đăng nhập thành công!');
+        if (onLogin) onLogin(); // cập nhật login state
+        navigate('/home');      // chuyển về màn home
+      } else {
+        setErrorMsg('Không nhận được token từ máy chủ!');
+      }
     } catch (error) {
+      console.error(error);
       setErrorMsg('Sai tài khoản hoặc mật khẩu!');
     }
   };

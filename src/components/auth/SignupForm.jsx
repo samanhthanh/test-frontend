@@ -1,10 +1,9 @@
-// src/components/SignupForm.jsx
 import React, { useState } from 'react';
 import {
   Box, Button, TextField, Typography, Container, Alert, Link
 } from '@mui/material';
 import { Link as RouterLink } from 'react-router-dom';
-import axios from 'axios';
+import axios from '../../axiosConfig';
 
 const SignupForm = () => {
   const [formData, setFormData] = useState({
@@ -25,8 +24,7 @@ const SignupForm = () => {
     setErrorMsg('');
     setSuccessMsg('');
     try {
-      // const response = await axios.post('http://localhost:8080/api/auth/signup', formData);
-      const response = await axios.post('https://springboot-app-afro.onrender.com/api/auth/signup', formData);
+      const response = await axios.post('/api/auth/signup', formData);
       console.log(response.data);
       setSuccessMsg('Đăng ký thành công! Hãy đăng nhập.');
       setFormData({ username: '', email: '', password: '' });
