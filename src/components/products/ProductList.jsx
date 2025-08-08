@@ -62,31 +62,30 @@ export default function ProductList() {
         </button>
       </div>
 
-      <table className="border w-full mb-4">
-        <thead>
-          <tr className="bg-gray-100">
-            <th>ID</th>
-            <th>Name</th>
-            <th>Image</th>
-            <th>Price</th>
-            <th>Qty</th>
+      <table className="w-full text-sm text-left text-gray-700 border-collapse rounded-lg overflow-hidden shadow-md">
+        <thead className="bg-gray-100 text-gray-600 uppercase text-xs">
+          <tr>
+            <th scope="col" className="px-6 py-3 text-center">#</th>
+            <th scope="col" className="px-6 py-3 text-center">Name</th>
+            <th scope="col" className="px-6 py-3 text-center">Image</th>
+            <th scope="col" className="px-6 py-3 text-center">Price</th>
+            <th scope="col" className="px-6 py-3 text-center">Qty</th>
           </tr>
         </thead>
-        <tbody>
-          {products.map(p => (
-            <tr key={p.id} className="text-center border-t">
-              <td>{p.id}</td>
-              <td>{p.productName}</td>
-              <td>
+        <tbody className="bg-white">
+          {products.map((p, index) => (
+            <tr key={p.id} className="border-b hover:bg-gray-50 text-center">
+              <td className="px-6 py-4 font-medium text-gray-900">{index + 1}</td>
+              <td className="px-6 py-4">{p.productName}</td>
+              <td className="px-6 py-4">
                 {p.image ? (
-                  <img src={p.image} alt={p.productName} className="h-10 mx-auto" />
+                  <img src={p.image} alt={p.productName} className="h-8 w-8 object-cover mx-auto rounded" />
                 ) : (
-                  'No image'
+                  <span className="text-gray-400 italic">No image</span>
                 )}
               </td>
-
-              <td>{p.price}</td>
-              <td>{p.quantity}</td>
+              <td className="px-6 py-4">${p.price}</td>
+              <td className="px-6 py-4">{p.quantity}</td>
             </tr>
           ))}
         </tbody>
@@ -99,8 +98,6 @@ export default function ProductList() {
         <button disabled={page + 1 >= totalPages} onClick={() => setPage(page + 1)}
           className="px-2 py-1 bg-gray-300 rounded">Next</button>
       </div>
-
-      <ProductForm onAdd={fetchProducts} />
     </div>
   );
 }
