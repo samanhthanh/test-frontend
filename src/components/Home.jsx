@@ -21,6 +21,9 @@ export default function Home({ onLogout }) {
         <button onClick={() => navigate('/products')} className="bg-blue-500 text-white px-3 py-1 rounded">
           Danh sách sản phẩm
         </button>
+        <button onClick={() => navigate('/calculator')} className="bg-blue-500 text-white px-3 py-1 rounded">
+          Tính tuổi
+        </button>
         <button onClick={handleLogout} className="bg-red-500 text-white px-3 py-1 rounded">
           Đăng xuất
         </button>

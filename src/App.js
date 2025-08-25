@@ -5,6 +5,7 @@ import SignupForm from './components/auth/SignupForm';
 import Home from './components/Home';
 import ProductForm from './components/products/ProductForm';
 import ProductList from './components/products/ProductList';
+import AgeCalculator from './components/guest/AgeCalculator';
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(!!localStorage.getItem('token'));
@@ -26,6 +27,7 @@ function App() {
         <Route path="/add-product" element={isLoggedIn ? <ProductForm /> : <Navigate to="/" />} />
         <Route path="/products" element={isLoggedIn ? <ProductList /> : <Navigate to="/" />} />
         <Route path="/home" element={isLoggedIn ? <Home onLogout={() => setIsLoggedIn(false)} /> : <Navigate to="/" />} />
+        <Route path="/calculator" element={<AgeCalculator />} />
       </Routes>
     </Router>
   );
